@@ -1,0 +1,346 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>花花的世界会员注册用户页面</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'ol/ol.css' %}">
+    <script type="text/javascript" src="{% static 'js/jQuery.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha512-rO2SXEKBSICa/AfyhEK5ZqWFCOok1rcgPYfGOqtX35OyiraBg6Xa4NnBJwXgpIRoXeWjcAmcQniMhp22htDc6g=="
+          crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA=="
+            crossorigin="anonymous"></script>
+    <script src="{% static 'js/vue.js' %}"></script>
+    <script src="{% static 'ol/ol.js' %}"></script>
+    <style>
+        ::-webkit-scrollbar {
+            /*滚动条整体样式*/
+            width: 2px; /*高宽分别对应横竖滚动条的尺寸*/
+            height: 2px;
+        }
+
+        li > a {
+            color: black;
+        }
+
+        li > a:hover {
+            background-color: rgba(141, 131, 131, 0.2);
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+<div class="btn-group" role="group" aria-label="..." style="display: flex;position: fixed;top: 0px;width: 100%">
+      <button type="button" class="btn btn-secondary" style="background-color: #343A40;"><a href="#1" style="color: #989898;">管理员</a></button>
+      <button type="button" class="btn btn-secondary" style="background-color: #343A40;color: #989898"> <a href="#2" style="color: #989898">学生家庭信息</a></button>
+      <button type="button" class="btn btn-secondary" style="background-color: #343A40;color: #989898"> <a href="#3" style="color: #989898">学生实习信息</a></button>
+      <button type="button" class="btn btn-secondary" style="background-color: #343A40;color: #989898"> <a href="#4" style="color: #989898;transition:1000ms">学生工作信息</a></button>
+</div>
+<div class="container" id="register">
+     <a href="" name="1"></a>
+     
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="{% static 'image/dog.png' %}" alt="" width="72" height="72">
+        <h2>花花的世界管理员注册</h2>
+        <p class="lead">
+            欢迎注册花花的世界会员专享权益，注册成为花花的世界会员，即可享受......福利！开启你的地图使用之旅吧！
+        </p>
+    </div>
+    <form style="width: 100%" action="{% url 'index:sucessful' %}" method="post" enctype="multipart/form-data">
+        <!--姓名-->
+        <div class="form-group">
+            <label for="exampleInputEmail1">姓名</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="真实姓名......" name="name" @input="IsRightWrong(1)">
+            <div class="valid-feedback">
+                填写正确,小主的名字可真好听！
+            </div>
+            <div class="invalid-feedback">
+                填写错误,大哥能不能好好的填你的名字！
+            </div>
+            <small id="emailHelp" class="form-text text-muted">请填写正确的身份名称...</small>
+        </div>
+
+        <!--性别-->
+        <div class="form-group">
+            <label for="customRadioInline1">性别</label>
+            <div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" name="gender"
+                           class="custom-control-input"
+                           value="男">
+                    <label class="custom-control-label" for="customRadioInline1">男</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" name="gender"
+                           class="custom-control-input"
+                           value="女">
+                    <label class="custom-control-label" for="customRadioInline2">女</label>
+                </div>
+            </div>
+        </div>
+
+        <!--邮箱-->
+        <div class="form-group">
+            <label for="email11">邮件</label>
+            <input type="email" class="form-control" id="email11" aria-describedby="email"
+                   placeholder="邮箱......" name="email" @input="IsRightWrong(2)">
+            <div class="valid-feedback">
+                填写正确！
+            </div>
+            <div class="invalid-feedback">
+                填写错误，请重新填写！
+            </div>
+            <small id="email" class="form-text text-muted">请填写QQ邮箱...</small>
+        </div>
+
+        <!--密码-->
+        <div class="form-group">
+            <label for="exampleInputPassword1">密码</label>
+            <input :type="type" class="form-control" id="exampleInputPassword1" placeholder="密码...... 双击可查看密码"
+                   name="password" @input="IsRightWrong(3)" @dblclick="TypeConversion">
+            <div class="valid-feedback">
+                密码强度足够,小主大可放心！有我他就破不了！
+            </div>
+            <div class="invalid-feedback">
+                密码强度太弱或者密码长度太长,小主请换个密码试一试！
+            </div>
+            <small id="passwordHelpInline" class="text-muted">
+                必须输入8-20位字母,数字,字符！
+            </small>
+        </div>
+
+        <!--家庭地址-->
+        <label for="address">家庭地址</label>
+        <div class="form-row" style="margin-left:0.1px">
+            <div>
+                <input type="text" class="form-control col" id="address" aria-describedby="emailHelp"
+                       placeholder="输入地址">
+                <ul style="overflow: scroll;max-height: 200px;list-style: none;box-shadow: 0 0 5px #d2caca;border-radius: 7px;text-align:left;padding: 0px">
+                    <li v-for=" (item,index) in palcename " @click="location(index)"
+                        style="margin-top: 10px">
+                        <a href="javascript:">
+                            <img src="{% static 'image/定位.png' %} " style="width: 20px">
+                            {% verbatim %}
+                            {{ item.name }}
+                            {% endverbatim %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--位置确认按钮组件-->
+            <div class="col" style="margin-top:2px">
+                <button class="btn btn-secondary btn-sm " type="button" data-toggle="collapse"
+                        data-target="#collapseExample11"
+                        aria-expanded="false" aria-controls="collapseExample11">
+                    <img src="{% static 'image/map.png' %}" alt="map" style="width: 20px">具体地址
+                </button>
+                <div id="collapseExample11" class="collapse">
+                    <h1>功能尚未实现</h1>
+                </div>
+            </div>
+
+            <input type="text" name="longitude" id="longitude" style="display: none">
+            <input type="text" name="latitude" id="latitude" style="display: none">
+        </div>
+
+        <div class="form-group">
+             <label for="customFile">头像文件</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile"  name="file">
+                <label class="custom-file-label" for="customFile">上传头像</label>
+            </div>
+        </div>
+
+
+
+        <div style="margin-left: 50%;transform: translate(-50%,10px);text-align: center">
+            <!--确认无误按钮-->
+            <div class="custom-control custom-switch form-group">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                <label class="custom-control-label" for="customSwitch1">填写内容确定无误！</label>
+            </div>
+            <!--提交-->
+            <button type="submit" class="btn btn-secondary btn-sm">确认提交</button>
+        </div>
+
+    </form>
+
+     <a href="" name="2"></a>
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="{% static 'image/dog.png' %}" alt="" width="72" height="72">
+        <h2>花花的世界会员注册</h2>
+        <p class="lead">
+            欢迎注册花花的世界会员专享权益，注册成为花花的世界会员，即可享受......福利！开启你的地图使用之旅吧！
+        </p>
+    </div>
+    <form action=""></form>
+
+    <a href="" name="3"></a>
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="{% static 'image/dog.png' %}" alt="" width="72" height="72">
+        <h2>花花的世界会员注册</h2>
+        <p class="lead">
+            欢迎注册花花的世界会员专享权益，注册成为花花的世界会员，即可享受......福利！开启你的地图使用之旅吧！
+        </p>
+    </div>
+    <form action=""></form>
+
+    <a href="" name="4"></a>
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="{% static 'image/dog.png' %}" alt="" width="72" height="72">
+        <h2>花花的世界会员注册</h2>
+        <p class="lead">
+            欢迎注册花花的世界会员专享权益，注册成为花花的世界会员，即可享受......福利！开启你的地图使用之旅吧！
+        </p>
+    </div>
+    <form action=""></form>
+</div>
+
+<script>
+
+    let palceNmaeLonlat = [];
+    let map_test = new ol.Map({
+        target: 'collapseExample11',
+        controls: ol.control.defaults({
+            attribution: false,
+            zoom: false,
+            rotate: false
+        }).extend([]),
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            }),
+        ],
+        view: new ol.View({
+            center: [116, 30],
+            zoom: 12,
+            projection: 'EPSG:4326'
+        })
+    })
+
+    let vue_register = new Vue({
+        el: '#register',
+        data: {
+            palcename: palceNmaeLonlat,
+            type: 'password',
+            lable: true
+        },
+        methods: {
+            IsRightWrong(parameter) {
+                if (parameter === 1) {
+                    let value = $('#exampleInputEmail1').val()
+                    if (value.length === 0) {
+                        $('#exampleInputEmail1').removeClass('is-valid')
+                        $('#exampleInputEmail1').removeClass('is-invalid')
+                        return
+                    }
+                    if ((value.length > 0) && (value.length <= 4)) {
+                        $('#exampleInputEmail1').removeClass('is-invalid')
+                        $('#exampleInputEmail1').addClass('is-valid')
+                        return
+                    }
+                    $('#exampleInputEmail1').removeClass('is-valid')
+                    $('#exampleInputEmail1').addClass('is-invalid')
+                } else if (parameter === 2) {
+                    let value = $('#email11').val()
+                    if (value.length === 0) {
+                        $('#email11').removeClass('is-valid')
+                        $('#email11').removeClass('is-invalid')
+                        return
+                    }
+                    if (value.search('@') === -1) {
+                        $('#email11').addClass('is-invalid')
+                        $('#email11').removeClass('is-valid')
+                        return
+                    }
+                    $('#email11').addClass('is-valid')
+                    $('#email11').removeClass('is-invalid')
+                } else {
+                    let value = $('#exampleInputPassword1').val()
+                    if (value.length === 0) {
+                        $('#exampleInputPassword1').removeClass('is-invalid')
+                        $('#exampleInputPassword1').removeClass('is-valid')
+                        return
+                    }
+                    if ((value.length >= 8) && (value.length <= 20)) {
+                        $('#exampleInputPassword1').addClass('is-valid')
+                        $('#exampleInputPassword1').removeClass('is-invalid')
+                        return
+                    }
+                    $('#exampleInputPassword1').addClass('is-invalid')
+                    $('#exampleInputPassword1').removeClass('is-valid')
+                }
+            },
+            TypeConversion() {
+                if (this.lable) {
+                    this.lable = !this.lable
+                    this.type = 'text'
+                    return
+                }
+                this.type = "password"
+                this.lable = !this.lable
+            },
+            location(index) {
+                //动画定位
+                const str = this.palcename[index].lonlat;
+                let coordinate = [];
+                coordinate.push(parseFloat(str.split(" ")[0]));
+                coordinate.push(parseFloat(str.split(" ")[1]));
+                location_2(map_test.getView(), coordinate)
+                //赋值点击的位置数据框
+                document.getElementById("address").value = this.palcename[index].name;
+                vue_register.palcename = []
+                $('#longitude').val(parseFloat(str.split(" ")[0]))
+                $('#latitude').val(parseFloat(str.split(" ")[1]))
+            }
+        }
+    })
+
+
+    document.getElementById("address").oninput = function () {
+        palceNmaeLonlat = [];
+        var PalceName = document.getElementById("address").value;
+        var json = "http://api.tianditu.gov.cn/search?postStr={%22keyWord%22:%22" + PalceName +
+        "%22,%22level%22:%2215%22,%22mapBound%22:%22116.40569,39.91088,116.45119,39.93542%22,%22queryType%22:%227%22,%22count%22:%2230%22,%22start%22:%220%22,%22queryTerminal%22:%2210000%22}&type=query&tk=7c5446b22e129b1d0cb6147e19f9682d";
+        $.getJSON(json, function (data) {
+            for (let index = 0; index < data.pois.length; index++) {
+                palceNmaeLonlat.push({
+                    name: data.pois[index].name,
+                    lonlat: data.pois[index].lonlat
+                });
+            }
+        })
+        $('#longitude').val('')
+        $('#latitude').val('')
+        vue_register.palcename = palceNmaeLonlat;
+
+    }
+
+    function location_2(map_c, coor) {
+        const view = map_c;
+        view.animate({
+            center: coor,
+            duration: 2000,
+            easing: function elastic(t) {
+                return Math.pow(2, -10 * t) * Math.sin((t - 0.075) * (2 * Math.PI) / 0.3) + 1;
+            },
+            zoom: 12
+        })
+    }
+
+
+
+
+</script>
+</body>
+</html>

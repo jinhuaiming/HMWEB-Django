@@ -1,0 +1,19 @@
+{% load  static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提交成功</title>
+</head>
+<body style="text-align: center;background-color: rgba(238,223,223,0.5)">
+<div style="margin-top:100px">
+    <h1>数据保存成功，点击图片返回主页！</h1
+</div>
+<div>
+     <a href="{% url 'index:main' %}">
+         <img src="{% static 'image/sucessful.png' %}" alt="none">
+    </a>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>map_show_plane</title>
+
+    <link href="{% static "css/map.css" %}" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="{% static "js/map.js" %}"></script>
+    <script src="{% static "js/jQuery.js" %}"></script>
+    <link rel="stylesheet" href="http://localhost/arcgis_js_api/library/4.14/esri/themes/light/main.css"/>
+
+    <script src="http://localhost/arcgis_js_api/library/4.14/init.js"></script>
+  </head>
+<body scroll="no">
+
+<div id="view_map" class="view_map">
+    <div id="xia_la_button" style="text-align: center; width:80px;height: 40px;margin-left:0px">
+        <i id='globe' class="fa fa-globe fa-2x" aria-hidden="true" style="display: block"></i>
+        <i style="display: block;font-style: normal;color:#b7b7b7;font-size: 11px">疫情分析</i>
+    </div>
+</div>
+<div style="height: 650px">
+    <div class="xia_la" id="xia_la">
+        <div class="top_1">
+            <div class="top_1_item1"><p>全球疫情大视角</p></div>
+            <div class="sou_su">
+                <input type="text" class="sou_su_true" id="sou_su_true" placeholder="查询国家:china"/>
+                <div id='sou_su_div' class="sou_su_div" style="transform: translate(-20px,-2px);float: left"><i
+                        class="fa fa-hand-pointer-o" aria-hidden="true"></i></div>
+            </div>
+            <table style="display: block;width: 100%;height:5%">
+                <tr style="width:100%;text-align:center">
+                    <th style="width:11%;color:#d2c017de;font-weight: 100;">隶属州</th>
+                    <th style="width:30%;color: #d2c017de;font-weight: 100;">国家</th>
+                    <th style="width:11%;color: #d2c017de;font-weight: 100;">确诊数</th>
+                    <th style="width:11%;color: #d2c017de;font-weight: 100;">死亡数</th>
+                    <th style="width:11%;color: #d2c017de;font-weight: 100;">治愈数</th>
+                    <th style="width:11%;color: #d2c017de;font-weight: 100;">死亡率</th>
+                </tr>
+            </table>
+            <div class="top_1_item2">
+                <div class="top_1_item2_1">
+                    <table class="table" id="table">
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        {#下拉框左部分#}
+        <div class="top_2">
+            <div class="top_2_item1">
+                <div>
+                    <div class="item_1" id="item_1"></div>
+                </div>
+                {#全球感染总人数#}
+                <div>
+                    <div class="item_2" id="item_2"></div>
+                </div>
+                {#全球治愈总人数#}
+                <div>
+                    <div class="item_3" id="item_3"></div>
+                </div>
+                {#全球死亡总人数#}
+            </div>
+            {#上半部分#}
+            <div class="top_2_item2">
+                <div class="map_analysis" id="map_analysis" style="text-align: center; width:40px;height: 40px">
+                    <i class="fa fa-hand-pointer-o fa-x" aria-hidden="true" style="display: block;margin-top: 5px"></i>
+                    <i style="display: block;font-size:11px;font-style: normal">取消</i>
+                </div>
+                {#拉框上拉按钮#}
+            </div>
+            {#下半部分#}
+        </div>
+        {#下拉框右部分#}
+    </div>
+</div>
+
+</body>
+</html>

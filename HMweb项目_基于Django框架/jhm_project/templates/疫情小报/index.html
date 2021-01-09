@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN" style="width: 100%;height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>web学习项目</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{% static 'image/dog.png' %}">
+    <link rel="stylesheet" href="{% static 'ol/ol.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <script type="text/javascript" src="{% static 'js/jQuery.js' %}"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha512-rO2SXEKBSICa/AfyhEK5ZqWFCOok1rcgPYfGOqtX35OyiraBg6Xa4NnBJwXgpIRoXeWjcAmcQniMhp22htDc6g=="
+          crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA=="
+            crossorigin="anonymous"></script>
+    <script src="{% static 'ol/ol.js' %}"></script>
+
+
+</head>
+<body style="width: 100%;height: 100%">
+
+<div style="width:100%;">
+    <nav class="site-header sticky-top py-1 bg-dark">
+        <div class="container d-flex flex-column flex-md-row justify-content-between">
+            <a class="py-2" href="javascript:void(0)" style="color: #989898">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="d-block mx-auto">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
+                    <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
+                    <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
+                    <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
+                    <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
+                    <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
+                </svg>
+            </a>
+            <a class="py-2 d-none d-md-inline-block" href="{% url 'index:main' %}" style="color: #989898">主页</a>
+            <a class="py-2 d-none d-md-inline-block" href="{% url 'index:map' %}" style="color:#989898">ArcGIS-Map</a>
+            <a class="py-2 d-none d-md-inline-block" href="{% url 'index:yq_ol' %}"
+               style="color: #989898">OpenLayer-Map</a>
+            <a class="py-2 d-none d-md-inline-block" href="{% url 'index:yq_baike' %}"
+               style="color:#989898">疫情百科</a>
+            <a class="py-2 d-none d-md-inline-block" href="{% url 'index:epidemic_data' %}"
+               style="color:#989898">疫情动态</a>
+            <li class="nav-item dropdown " style="list-style: none;">
+                <a class="nav-link dropdown-toggle" href="javascript:" id="navbarDropdown" role="button"
+                   data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" style="color: #989898">
+                    学生信息
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="border-radius: 10px">
+                    <a class="dropdown-item" href="{% url 'index:admin_new' %}">管理员</a>
+                    <a class="dropdown-item" href="JavaScript:">学生家庭信息</a>
+                    <a class="dropdown-item" href="JavaScript:">学生实习信息</a>
+                    <a class="dropdown-item" href="JavaScript:">学生工作信息</a>
+                </div>
+            </li>
+        </div>
+    </nav>
+</div>
+<div style="width:100%;height:92%;position:relative;" id="map">
+    <div class="col-md-5 p-lg-5 mx-auto my-5 "
+         style="position: absolute;z-index: 111;left:50%;transform: translate(-50%,20%);text-align: center">
+        <h1 class="display-3 font-weight-normal">HM WEB</h1>
+        <p class="lead font-weight-normal">
+            一款基于django框架速写的web,旨在打造最酷，最炫,最实用的网站!
+            <br>
+            花花的世界欢迎您的加入！
+        </p>
+        <a class="btn btn-outline-secondary" href="{% url 'index:register' %}">
+            JOIN ME
+        </a>
+    </div>
+</div>
+
+
+<script>
+    let map = new ol.Map({
+        target: 'map',
+        controls: ol.control.defaults({
+            attribution: false,
+            zoom: false,
+            rotate: false
+        }).extend([
+        ]),
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            }),
+        ],
+        view: new ol.View({
+            center: [116, 30],
+            zoom: 12,
+            projection: 'EPSG:4326'
+        })
+    })
+
+    setInterval(function () {
+        location_1(map.getView(), [116.05, 30])
+        setTimeout(function () {
+            location_1(map.getView(), [116, 30])
+        }, 2000)
+    }, 4000)
+
+
+    function location_1(map_c, coor) {
+        const view = map_c;
+        view.animate({
+            center: coor,
+            duration: 2000,
+            easing: function elastic(t) {
+                return Math.pow(2, -10 * t) * Math.sin((t - 0.075) * (2 * Math.PI) / 0.3) + 1;
+            },
+            zoom: 12
+        })
+    }
+
+</script>
+</body>
+</html>

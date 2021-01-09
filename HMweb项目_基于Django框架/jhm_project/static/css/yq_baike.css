@@ -1,0 +1,38 @@
+*{
+    margin-top: 0px;
+}
+.item{
+    width:85%;
+    height: 2000px;
+    box-shadow: 0 0 15px rgba(58, 54, 56, 0.32);
+    border-radius: 5px;
+    margin-left:50%;
+    transform:translate(-50%,0px);
+}
+.left{
+    width: 70%;
+    float:left;
+}
+.left-item{
+    width: 90%;
+    margin-left:50%;
+    transform: translate(-50%,0px);
+}
+.right{
+    width: 29%;
+    float: left;
+}
+.right>div{
+    width: 100%;
+    margin-top: 10px;
+}
+.right>div>p{
+    text-indent: 2em;
+    font-family: cursive;
+}
+.right>div>img{
+    width: 100%;
+}
+.right-item{
+    border: 1px black dashed;
+}
