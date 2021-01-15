@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha512-rO2SXEKBSICa/AfyhEK5ZqWFCOok1rcgPYfGOqtX35OyiraBg6Xa4NnBJwXgpIRoXeWjcAmcQniMhp22htDc6g=="
           crossorigin="anonymous"/>
-    <link rel="stylesheet" type="text/css" href="{% static "css/layui.css"%}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "css/layui.css"%}" media="all">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
@@ -15,11 +16,35 @@
             integrity="sha512-I5TkutApDjnWuX+smLIPZNhw+LhTd8WrQhdCKsxCFRSvhFx2km8ZfEpNIhF9nq04msHhOkE8BMOBj5QE07yhMA=="
             crossorigin="anonymous"></script>
     <script src="{% static "js/vue.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/layui.all.js"%}"></script>
-    <script src='{% static 'js/jQuery.js'%}'></script>
+
+    <script type="text/javascript" src="{% static "js/layui.all.js"%}" charset="utf-8"></script>
+
 </head>
 <body>
 
+
+
+<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;">
+  <li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">默认展开</a>
+    <dl class="layui-nav-child">
+      <dd><a href="javascript:;">选项一</a></dd>
+      <dd><a href="javascript:;">选项二</a></dd>
+      <dd><a href="javascript:;">选项三</a></dd>
+      <dd><a href="">跳转项</a></dd>
+    </dl>
+  </li>
+  <li class="layui-nav-item">
+    <a href="javascript:;">解决方案</a>
+    <dl class="layui-nav-child">
+      <dd><a href="">移动模块</a></dd>
+      <dd><a href="">后台模版</a></dd>
+      <dd><a href="">电商平台</a></dd>
+    </dl>
+  </li>
+  <li class="layui-nav-item"><a href="">云市场</a></li>
+  <li class="layui-nav-item"><a href="">社区</a></li>
+</ul>
 
 {% verbatim %}
 <div id="app">
@@ -84,7 +109,10 @@
 </div>
 {% endverbatim %}
 
-<script type="text/javascript">
+
+
+<script type="text/javascript">   
+
 
 
     const n = 5;
