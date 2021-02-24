@@ -87,6 +87,9 @@
             rotate: false
         }).extend([
         ]),
+        interactions:ol.interaction.defaults({
+            dragPan:false
+        }),
         layers: [
             new ol.layer.Tile({
                 source: new ol.source.OSM()
